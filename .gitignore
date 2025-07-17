@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.env
+*.log
+*.sqlite3
+node_modules/
+dist/
+build/
+*.swp
+.DS_Store
+.idea/
+.vscode/
+*.bak
+*.tar
+*.zip
+*.egg-info/
+.minikube/
