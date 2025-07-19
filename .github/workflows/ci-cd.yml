@@ -28,7 +28,7 @@ jobs:
      
       - name: Build and push frontend docker image
         run:
-          docker build -t ${{ secrects.DOCKER_USERNAME }}/sunrise-frontend:latest ./frontend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/sunrise-frontend:latest ./frontend
           docker push ${{ secrets.DOCKER_USERNAME }}/sunrise-frontend:latest
              
      # - name: Save Docker Images as tarballs
