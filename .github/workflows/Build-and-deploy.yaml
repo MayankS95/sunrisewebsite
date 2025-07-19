@@ -30,3 +30,7 @@ jobs:
           kubectl apply -f k8s/
           kubectl rollout restart deployment backend-deployment
           kubectl rollout restart deployment frontend-deployment
+
+      - name: Print who triggered the build
+        run: echo "Triggered by ${{ github.actor }}"
+
