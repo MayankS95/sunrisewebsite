@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@3
 
       - name: Build Frontend Docker Image
         run: docker build -t frontend:latest ./frontend
@@ -21,13 +21,13 @@ jobs:
       - name: Build Backend Docker Image
         run: docker build -t backend:latest ./backend
 
-      - name: Save Images as TAR
+      - name: Save Docker Images as tarballs
         run: |
           docker save frontend:latest -o frontend.tar
           docker save backend:latest -o backend.tar
 
-      - name: Upload TAR files as Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload Docker Images as Artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: docker-images
           path: |
