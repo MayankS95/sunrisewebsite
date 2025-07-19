@@ -1,0 +1,35 @@
+name: CI/CD to Minikube
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Frontend Docker Image
+        run: docker build -t frontend:latest ./frontend
+
+      - name: Build Backend Docker Image
+        run: docker build -t backend:latest ./backend
+
+      - name: Save Images as TAR
+        run: |
+          docker save frontend:latest -o frontend.tar
+          docker save backend:latest -o backend.tar
+
+      - name: Upload TAR files as Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-images
+          path: |
+            frontend.tar
+            backend.tar
