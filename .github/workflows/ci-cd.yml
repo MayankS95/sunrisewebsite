@@ -21,19 +21,25 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Build and push backend docker image
+        run: 
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/sunrise-backend:latest ./backend
+          docker push ${{ secrets.DOCKER_USERNAME }}/sunrise-backend:latest
+     
+      - name: Build and push frontend docker image
+        run:
+          docker build -t ${{ secrects.DOCKER_USERNAME }}/sunrise-frontend:latest ./frontend
+          docker push ${{ secrets.DOCKER_USERNAME }}/sunrise-frontend:latest
+             
+     # - name: Save Docker Images as tarballs
+      #  run: |
+       #   docker save frontend:latest -o frontend.tar
+        #  docker save backend:latest -o backend.tar
 
-      - name: Build Backend Docker Image
-        run: docker build -t backend:latest ./backend
-
-      - name: Save Docker Images as tarballs
-        run: |
-          docker save frontend:latest -o frontend.tar
-          docker save backend:latest -o backend.tar
-
-      - name: Upload Docker Images as Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: docker-images
-          path: |
-            frontend.tar
-            backend.tar
+      #- name: Upload Docker Images as Artifacts
+       # uses: actions/upload-artifact@v4
+       # with:
+        #  name: docker-images
+          #path: |
+          #  frontend.tar
+          #  backend.tar
